@@ -16,10 +16,10 @@ def page_not_found(e):
 
 @app.route('/tmp/<filename>')
 def tmp(filename):
-    path = os.path.join('tmp', filename)
-
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'tmp', filename)
+    print path
     if os.path.isfile(path):
-        return send_file(os.path.join("tmp",filename)), 200
+        return send_file(path), 200
     else:
         abort(404, 'File not found')
 
